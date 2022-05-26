@@ -3,11 +3,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Sqlite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VacationSpots12._1.Services;
+using VacationSpots12._1.Models;
 
 
 namespace VacationSpots12._1
@@ -25,12 +28,22 @@ namespace VacationSpots12._1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddSingleton<IData, Data>();
+            //services.AddSingleton<IData, Data>(); //in memory list
+            services.AddScoped <IData, DBData>();    //database 
+
+            //connects app to the DB
+            //services.AddDbContext<VacationContext>(options => options.UseSqlite("Data Source = Vacations.db"));  //sqlite 
+            services.AddDbContext<VacationContext>(options => options.UseSqlServer(@"Server = VSFULLSTACK\SQLEXPRESS;Database=EmpSytemdb;Trusted_Connection=true;MultipleActiveResultSets=True")); //sqlserver
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(VacationContext vacationContext, IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+            //vacationContext.Database.EnsureDeleted();
+            //checks if DB is alive
+            vacationContext.Database.EnsureCreated();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -54,4 +67,3 @@ namespace VacationSpots12._1
         }
     }
 }
-

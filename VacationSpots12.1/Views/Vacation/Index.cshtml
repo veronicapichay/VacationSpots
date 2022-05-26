@@ -5,45 +5,37 @@
 
 <h1>Vacation Spots</h1>
 
-<a asp-action="Create" asp-controller="Vacation">Create a new vacation</a>
+
 
 <table class = "table">
     <thead>
-
         <tr>
             <th>
                 @* displays the heading for the column ID *@
                 @Html.DisplayNameFor(model => model.Vacations.Last().Id)
             </th>
-
             
             <th>
                 @* displays the heading for the column Name *@
                 @Html.DisplayNameFor(temp  => temp.Vacations.Last().Name)
             </th>
-
         </tr>
-
     </thead>
-
     <tbody>
 
         @foreach(var item in Model.Vacations)
         {
             <tr>
-
-              
                     @* displays the value *@
                     <td>  @Html.DisplayFor(modelitem => item.Id)  </td>
-
                     <td>  @Html.DisplayFor(modelitem => item.Name)  </td>
-
                     <td>  <a asp-action = "Details" asp-controller = "Vacation" asp-route-id = "@item.Id"> Details </a> </td>
-
+                     <td>  <a asp-action = "Edit" asp-controller = "Vacation" asp-route-id = "@item.Id"> Edit </a> </td>
+                      <td>  <a asp-action = "Delete" asp-controller = "Vacation" asp-route-id = "@item.Id"> Delete </a> </td>
             </tr>
-
         }
 
     </tbody>
 </table>
 
+<a asp-action="Create" asp-controller="Vacation" class="btn btn-primary">Create Vacation</a>

@@ -20,7 +20,7 @@ namespace VacationSpots12._1.Services
                     Days = 5,
                     Description ="Get chased by lions and cheetahs while getting head banged inside a tiny jeep wrangler!",
                     ImageName ="africa.jpg",
-                    Price = "$6000",
+                    Price = 6000,
                     Categories = Category.Outback
                 },
                 new Vacation()
@@ -30,7 +30,7 @@ namespace VacationSpots12._1.Services
                     Days = 7,
                     Description ="Front row seat watching Kangaroos amateur boxing fights.",
                     ImageName ="australia.jpg",
-                    Price = "$8000",
+                    Price = 8000,
                     Categories = Category.Backpacking
                 },
                 new Vacation()
@@ -40,7 +40,7 @@ namespace VacationSpots12._1.Services
                     Days = 7,
                     Description =" Enjoy fresh seafood after exploring the coral reef. ",
                     ImageName ="indonesia.jpg",
-                    Price = "$5000",
+                    Price = 5000,
                     Categories = Category.Island
                 },
                 new Vacation()
@@ -50,7 +50,7 @@ namespace VacationSpots12._1.Services
                     Days = 4,
                     Description = "Perfect location for a quick rendezvous with your boo! ",
                     ImageName ="italy.jpg",
-                    Price = "$5000",
+                    Price = 5000,
                     Categories = Category.City
                 },
                  new Vacation()
@@ -60,7 +60,7 @@ namespace VacationSpots12._1.Services
                     Days = 3,
                     Description ="Experience full force adrenaline pump! ",
                     ImageName ="usa.jpg",
-                    Price = "$1000",
+                    Price = 1000,
                     Categories = Category.Backpacking
                  }
             };
@@ -69,12 +69,14 @@ namespace VacationSpots12._1.Services
 
         public void AddVacation(Vacation vacation)
         {
-            throw new System.NotImplementedException();
+            Vacations.Add(vacation);
         }
 
         public void DeleteVacation(int? id)
         {
-            throw new System.NotImplementedException();
+            var vac = Vacations.Find(x => x.Id == id);
+            if (vac != null)
+            Vacations.Remove(vac);
         }
 
         public Vacation GetVacation(int? id)
@@ -100,7 +102,17 @@ namespace VacationSpots12._1.Services
 
         public void UpdateVacation(Vacation vacation)
         {
-            throw new System.NotImplementedException();
+            var vac = Vacations.Find(x => x.Id == vacation.Id);
+            if (vac != null)
+            {
+                vac.Id = vacation.Id;
+                vac.Name = vacation.Name;
+                vac.Days = vacation.Days;
+                vac.Description = vacation.Description;
+                vac.ImageName = vacation.ImageName;
+                vac.Categories = vacation.Categories;
+                vac.Price = vacation.Price;
+            }
         }
     }
 }

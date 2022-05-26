@@ -17,12 +17,45 @@ namespace VacationSpots12._1.Controllers
 
 
         }
-
+        [HttpGet]
         public IActionResult Create()
         {
 
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Create(Vacation obj)
+        {
+            if (ModelState.IsValid) //validation
+            {
+                _tempdata.AddVacation(obj);
+                ViewBag.Message = "Vacation added successfully!";
+            }
+            return View(obj);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            Vacation obj = _tempdata.GetVacation(id);
+            return View(obj);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Vacation obj, int id)
+        {
+            obj.Id = id;
+            _tempdata.UpdateVacation(obj);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(int id)
+        {
+            _tempdata.DeleteVacation(id);
+            return RedirectToAction("Index");
+        }
+
 
         public IActionResult Details(int? id)
         {
