@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿
+
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,7 +11,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body>
+<body style=" background-color:goldenrod">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
@@ -25,9 +29,6 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Vacation" asp-action="Index">Vacations</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Categories</a>
                         </li>
                     </ul>
@@ -39,22 +40,15 @@
         <main role="main" class="pb-3">
 
             @*This is method replaces the actual content of the view e.g Create/Details view*@
-            @*This page decides the location of where the data is placed hence the @render *@
 
             @RenderBody()
-
-            @RenderSection("section1", false) @*definition is given by the view itself*@
-
-
-
         </main>
     </div>
 
     <footer class="border-top footer text-muted">
-
-        @RenderSection("Footer", true)
-
-
+        <div class="container">
+            &copy; 2022 - VacationSpots12._1 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
