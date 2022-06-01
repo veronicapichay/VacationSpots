@@ -46,11 +46,11 @@ namespace VacationSpots12._1
 
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage();  //detailed error page
             }
-            else
+            else if (env.IsProduction())
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Home/Error"); //create this page in wwwroot folder
             }
             app.UseStaticFiles();
 

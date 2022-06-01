@@ -15,6 +15,17 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
+
+    "Production": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT":"Production"
+      }
+    },
+
+
+
     "VacationSpots12._1": {
       "commandName": "Project",
       "dotnetRunMessages": "true",

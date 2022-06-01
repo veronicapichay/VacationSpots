@@ -13,10 +13,6 @@ namespace VacationSpots12._1.Models
         {
 
 
-
-
-
-
         }
 
          //table 1

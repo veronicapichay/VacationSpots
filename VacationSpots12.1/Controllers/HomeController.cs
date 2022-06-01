@@ -6,9 +6,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using VacationSpots12._1.Models;
+using VacationSpots12._1.Filters;
 
 namespace VacationSpots12._1.Controllers
 {
+
+    [SimpleActionFilter]
+    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -20,18 +24,40 @@ namespace VacationSpots12._1.Controllers
 
         public IActionResult Index()
         {
+            //try
+            //{
+            //    int i, j;
+            //    i = 5;
+            //    j = 0;
+            //    int k = i / j;
+
+            //    throw new CustomException;
+            //}
+
+
+            //catch (CustomException ex)
+            //{
+
+            //    return RedirectToAction("Error");
+
+            //}
+
             return View();
+
         }
+
 
         public IActionResult Privacy()
         {
+
             return View();
+
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();  //calls the error.cshtml from Home folder 
         }
     }
 }
