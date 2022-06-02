@@ -7,6 +7,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using VacationSpots12._1.Models;
 using VacationSpots12._1.Filters;
+using Microsoft.AspNetCore.Authorization;
+
+
+
+
 
 namespace VacationSpots12._1.Controllers
 {
@@ -22,6 +27,7 @@ namespace VacationSpots12._1.Controllers
             _logger = logger;
         }
 
+        [AllowAnonymous] //any user can access the home index 
         public IActionResult Index()
         {
             //try
@@ -45,7 +51,6 @@ namespace VacationSpots12._1.Controllers
             return View();
 
         }
-
 
         public IActionResult Privacy()
         {

@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Sqlite;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,12 +35,28 @@ namespace VacationSpots12._1
 
             //connects app to the DB
             //services.AddDbContext<VacationContext>(options => options.UseSqlite("Data Source = Vacations.db"));  //sqlite 
-            services.AddDbContext<VacationContext>(options => options.UseSqlServer(@"Server = VSFULLSTACK\SQLEXPRESS;Database=EmpSytemdb;Trusted_Connection=true;MultipleActiveResultSets=True")); //sqlserver
+            services.AddDbContext<VacationContext>(options => options.UseSqlServer(@"Server = VSFULLSTACK\SQLEXPRESS;Database=VacayLocationdb;Trusted_Connection=true;MultipleActiveResultSets=True")); //sqlserver
+
+            //requirements for password and connecting it to db to be migrated
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+
+                options.Password.RequiredLength = 8;
+
+            }).AddEntityFrameworkStores<UserContext>();
+
+            services.AddDbContext<UserContext>(options => options.UseSqlServer(@"Server = VSFULLSTACK\SQLEXPRESS;Database=UserVacaydb;Trusted_Connection=true;MultipleActiveResultSets=True")); //sqlserver
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(VacationContext vacationContext, IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(UserContext userContext, VacationContext vacationContext, IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+            userContext.Database.EnsureCreated();
+
 
             //vacationContext.Database.EnsureDeleted();
             //checks if DB is alive
@@ -53,6 +71,11 @@ namespace VacationSpots12._1
                 app.UseExceptionHandler("/Home/Error"); //create this page in wwwroot folder
             }
             app.UseStaticFiles();
+
+            //user authentication
+            app.UseAuthentication();
+
+
 
             app.UseRouting();
 

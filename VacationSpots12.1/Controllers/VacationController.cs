@@ -1,7 +1,7 @@
 ﻿using VacationSpots12._1.Models;
 using VacationSpots12._1.Services;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace VacationSpots12._1.Controllers
 {
@@ -18,6 +18,7 @@ namespace VacationSpots12._1.Controllers
 
         }
         [HttpGet]
+        [Authorize(Roles = "Admin")] //prompt the user to login first
         public IActionResult Create()
         {
 
@@ -36,6 +37,7 @@ namespace VacationSpots12._1.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Edit(int id)
         {
             Vacation obj = _tempdata.GetVacation(id);
@@ -50,13 +52,14 @@ namespace VacationSpots12._1.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         public IActionResult Delete(int id)
         {
             _tempdata.DeleteVacation(id);
             return RedirectToAction("Index");
         }
 
-
+        [Authorize(Roles = "Buyer")]
         public IActionResult Details(int? id)
         {
             var vac = _tempdata.GetVacation(id);
@@ -72,6 +75,9 @@ namespace VacationSpots12._1.Controllers
 
         }
 
+
+
+        [Authorize(Roles = "Buyer")]
         //sending the list of employees to the view 
         public IActionResult Index()
         {

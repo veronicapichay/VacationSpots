@@ -30,10 +30,42 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Categories</a>
                         </li>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            <li>
+                                <a asp-action="LogOut" asp-controller="Account"> Log out</a>
+                            </li>
+
+
+                        }
+                        else
+                        {
+                            
+                            <li>
+                                <a asp-action="Login" asp-controller="Account"> Log in</a>
+                            </li>
+
+
+                        }
+
+
                     </ul>
                 </div>
             </div>
         </nav>
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            
+            <h3>WELCOME @User.Identity.Name</h3>
+
+
+        }
+
+
+
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -52,7 +84,7 @@
 
     <footer class="border-top footer text-muted">
 
-        @RenderSection("Footer", true)
+        @RenderSection("Footer", false)
 
 
     </footer>
