@@ -30,27 +30,6 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Categories</a>
                         </li>
-
-                        @if (User.Identity.IsAuthenticated)
-                        {
-
-                            <li>
-                                <a asp-action="LogOut" asp-controller="Account"> Log out</a>
-                            </li>
-
-
-                        }
-                        else
-                        {
-                            
-                            <li>
-                                <a asp-action="Login" asp-controller="Account"> Log in</a>
-                            </li>
-
-
-                        }
-
-
                     </ul>
                 </div>
             </div>
@@ -61,11 +40,7 @@
             
             <h3>WELCOME @User.Identity.Name</h3>
 
-
         }
-
-
-
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -74,7 +49,6 @@
             @*This page decides the location of where the data is placed hence the @render *@
 
             @RenderBody()
-
             @RenderSection("section1", false) @*definition is given by the view itself*@
 
 
@@ -85,7 +59,6 @@
     <footer class="border-top footer text-muted">
 
         @RenderSection("Footer", false)
-
 
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

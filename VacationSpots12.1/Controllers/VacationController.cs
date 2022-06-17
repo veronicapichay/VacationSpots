@@ -12,11 +12,9 @@ namespace VacationSpots12._1.Controllers
 
         public VacationController (IData tempdata)
         {
-
             _tempdata = tempdata;
-
-
         }
+
         [HttpGet]
         [Authorize(Roles = "Admin")] //prompt the user to login first
         public IActionResult Create()
@@ -37,7 +35,7 @@ namespace VacationSpots12._1.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int id)
         {
             Vacation obj = _tempdata.GetVacation(id);
@@ -52,14 +50,13 @@ namespace VacationSpots12._1.Controllers
             return RedirectToAction("Index");
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             _tempdata.DeleteVacation(id);
             return RedirectToAction("Index");
         }
 
-        [Authorize(Roles = "Buyer")]
         public IActionResult Details(int? id)
         {
             var vac = _tempdata.GetVacation(id);
@@ -72,12 +69,8 @@ namespace VacationSpots12._1.Controllers
             }
 
             return View(vac);
-
         }
 
-
-
-        [Authorize(Roles = "Buyer")]
         //sending the list of employees to the view 
         public IActionResult Index()
         {

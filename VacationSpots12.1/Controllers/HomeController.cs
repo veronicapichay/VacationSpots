@@ -10,9 +10,6 @@ using VacationSpots12._1.Filters;
 using Microsoft.AspNetCore.Authorization;
 
 
-
-
-
 namespace VacationSpots12._1.Controllers
 {
 

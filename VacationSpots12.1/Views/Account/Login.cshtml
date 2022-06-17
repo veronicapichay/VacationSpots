@@ -3,13 +3,11 @@
 @{
     ViewData["Title"] = "Login";
 }
+<main class="form-signin w-100 m-auto">
+
+<div class="text-center">
 
 <h1>Login</h1>
-
-<h4>LoginViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
         <form asp-action="Login">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -28,11 +26,11 @@
                 </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Log in" class="btn btn-primary" />
+                <input type="submit" value="Log in" class="w-100 btn btn-lg btn-primary" />
             </div>
         </form>
-    </div>
 </div>
+</main>
 
 <div>
 
@@ -40,3 +38,7 @@
 
 
 </div>
+
+
+            
+ 

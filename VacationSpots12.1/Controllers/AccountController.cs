@@ -23,48 +23,31 @@ namespace VacationSpots12._1.Controllers
             roleManager = _role;
         }
 
-
-
         public IActionResult Login()
         {
             if (this.User.Identity.IsAuthenticated)
-            {
 
-                return RedirectToAction("Index", "Vacation");
-
-            }
-
+                return RedirectToAction("Index", "Home");
             return View();
-
         }
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
-
             if (ModelState.IsValid)
             {
 
                 var result = await signInManager.PasswordSignInAsync(loginViewModel.UserName, loginViewModel.Password, loginViewModel.RememberMe, false);
-
                 //checks if sign in is successful
                 if (result.Succeeded)
-                {
-
-                    return RedirectToAction("Index", "Employee");
-
-                }
-
+                    return RedirectToAction("Index", "Vacation");
             }
-
             ModelState.AddModelError("", "Please try again!");
             return View();
         }
 
-
         public IActionResult Register()
         {
-
 
             return View();
 
@@ -76,82 +59,50 @@ namespace VacationSpots12._1.Controllers
 
             if (ModelState.IsValid)
             {
-                VacationSpots12._1.Models.User newuser = new User()
+                User newuser = new User()
                 {
-
                     FirstName = registerViewModel.FirstName,
                     LastName = registerViewModel.LastName,
                     UserName = registerViewModel.UserName,
                     PhoneNumber = registerViewModel.PhoneNumber.ToString(),
                     Email = registerViewModel.Email
-
                 };
 
-
-
                 var result = await userManager.CreateAsync(newuser, registerViewModel.Password);
-
                 //checks if sign in is successful
                 if (result.Succeeded)
                 {
                     var addedUser = await userManager.FindByNameAsync(newuser.UserName);
-                    return RedirectToAction("Login", "Account");
-
-                    if(addedUser.UserName == "Admin")
-                    {
-
+                    if (addedUser.UserName == "Admin")
                         await userManager.AddToRoleAsync(addedUser, "Admin");
-
-
-
-
-                    }
-
-                    else
-                    {
-
-                        await userManager.AddToRoleAsync(addedUser, "Buyer");
-
-
-                    }
-
-
-
-
-
-
-
+                    await userManager.AddToRoleAsync(addedUser, "Buyer");
+                    return RedirectToAction("Login", "Account");
                 }
 
                 foreach (var error in result.Errors)
-                {
-
                     ModelState.AddModelError("", error.Description);
 
-                }
             }
             return View();
 
         }
 
-            public async Task<IActionResult> LogOut()
+        public async Task<IActionResult> LogOut()
         {
-
-
             await signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
 
         }
 
 
-
-
-
-
-
         public IActionResult Index()
         {
             return View();
+
+
         }
+
+
     }
 }
+

@@ -34,8 +34,8 @@ namespace VacationSpots12._1
             services.AddScoped <IData, DBData>();    //database 
 
             //connects app to the DB
-            //services.AddDbContext<VacationContext>(options => options.UseSqlite("Data Source = Vacations.db"));  //sqlite 
-            services.AddDbContext<VacationContext>(options => options.UseSqlServer(@"Server = VSFULLSTACK\SQLEXPRESS;Database=VacayLocationdb;Trusted_Connection=true;MultipleActiveResultSets=True")); //sqlserver
+           // services.AddDbContext<VacationContext>(options => options.UseSqlite("Data Source = Vacations.db"));  //sqlite 
+           services.AddDbContext<VacationContext>(options => options.UseSqlServer(@"Server = VSFULLSTACK\SQLEXPRESS;Database=VacayLocationdb;Trusted_Connection=true;MultipleActiveResultSets=True")); //sqlserver
 
             //requirements for password and connecting it to db to be migrated
             services.AddIdentity<User, IdentityRole>(options =>

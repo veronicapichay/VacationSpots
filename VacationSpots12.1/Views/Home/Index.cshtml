@@ -3,10 +3,34 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Ready to have some fun?</h1>
-    <p>Click the "Vacations" tab to explore!</p>
-</div>
+  
+  <section id="hero">
+    <div class="hero-text">
+      <h1 class="display-4">Ready to have some fun?</h1>
+      <p class="description">
+       Click the "Vacations" tab to explore!
+      </p>
+      <a href="#contact" class="hero-btn btn align-center text-small btn-2">
 
+
+      @if (User.Identity.IsAuthenticated)
+      {
+        
+       <a asp-action="LogOut" asp-controller="Account"> Log out</a>
+      }
+      else
+      {
+      <a asp-action="Login" asp-controller="Account"> Log in</a>
+      }
+</a>
+    </div>
+
+    <div class="hero-image image-container">
+      <img src="https://blush.design/api/download?shareUri=dJS6JwGYL9MRKzCT&c=Bottom_0%7E2b44ff-0.1%7E393f82_Hair_0%7Eb58143-0.1%7E2c1b18_Skin_0%7Ed4a181-0.1%7E915b3c_Top_0%7Ef2f2f2-0.1%7Eff4133&w=800&h=800&fm=png" alt="Vacay Image">
+    </div>
+  </section>  
+ 
+   </div>
 @section Footer
 {
 

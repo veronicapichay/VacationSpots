@@ -11,7 +11,7 @@ namespace VacationSpots12._1.ViewModels
 
         public string UserName { get; set; }
 
-        [Required(ErrorMessage = "Please enter oassword")]
+        [Required(ErrorMessage = "Please enter password")]
         [DataType (DataType.Password)]
 
         public string Password { get; set; }
